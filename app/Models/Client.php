@@ -6,47 +6,44 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-
-
 /**
- * Class User
+ * Class Client
  * 
  * @property int $id
- * @property string $name
+ * @property string $nom
+ * @property string $prenom
  * @property string $email
- * @property Carbon|null $email_verified_at
  * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * 
+ * @property Collection|Commande[] $commandes
  *
  * @package App\Models
  */
-class User extends Model
+class Client extends Model
 {
 	use HasFactory, Notifiable;
-	protected $table = 'users';
-
-	protected $casts = [
-		'email_verified_at' => 'datetime'
-	];
+	protected $table = 'clients';
+	public $timestamps = false;
 
 	protected $hidden = [
-		'password',
-		'remember_token'
+		'password'
 	];
 
 	protected $fillable = [
-		'name',
+		'nom',
+		'prenom',
 		'email',
-		'email_verified_at',
-		'password',
-		'remember_token'
+		'password'
 	];
+
+	public function commandes()
+	{
+		return $this->hasMany(Commande::class, 'id_client');
+	}
 }
