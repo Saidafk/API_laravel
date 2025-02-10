@@ -13,8 +13,8 @@ Ce TP a pour but de familiariser avec la création d'API en utilisant Laravel. E
 
 ## Installation
 
-composer install
-php artisan install:api
+- ** composer install
+- ** php artisan install:api
 
 ### Prérequis
 
